@@ -38,7 +38,7 @@ lookup_ip() {
 main() {
 	check_prips
 
-	# this computers coure count
+	# this computers core count
 	cores=$(grep proces /proc/cpuinfo|wc -l)
 
 	# all the IPs to check
@@ -49,6 +49,8 @@ main() {
 	xargs -P $cores -n 1 -I {} bash -c 'lookup_ip "$1"' _ {}
 }
 
+
+[ $# -eq 0 ] && { echo "Usage: $0 8.8.8.0/32 192.168.1.0/24"; exit 1; }
 
 # array of networks in CIDR notation
 cidr_networks=$@
